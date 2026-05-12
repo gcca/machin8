@@ -1,0 +1,29 @@
+{{define "home/staff/index.tmpl"}}
+<!doctype html>
+<html lang="en" data-theme="lemonade">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>machin8</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="min-h-screen bg-base-200 text-base-content">
+  <main class="min-h-screen px-4 py-8 md:px-8">
+    <div class="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-4xl items-center justify-center">
+      <section class="card w-full bg-base-100 shadow-2xl ring-1 ring-base-300">
+        <div class="card-body items-start gap-4 p-8 sm:p-10">
+          <div class="badge badge-secondary border-0">machin8</div>
+          <h1 class="text-4xl font-semibold tracking-tight">Welcome</h1>
+          <p class="text-lg font-medium text-primary">{{.Kind}}</p>
+          <p class="max-w-2xl text-base/7 opacity-75">
+            You are signed in and ready to continue.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
+{{end}}

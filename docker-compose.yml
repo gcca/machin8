@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:18-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGPASSWORD: postgres
+      PGUSER: postgres
+      POSTGRES_DB: machin8
+    ports:
+      - "5436:5432"
+    volumes:
+      - machin8_data:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./db/fixtures/01-sampledata.sql:/docker-entrypoint-initdb.d/02-sampledata.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - SECRET=3d9DOtAdnpK7EiEMhxcHL6tXQCdoILxLQ7cPatAf_PM
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/machin8?sslmode=disable
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+
+volumes:
+  machin8_data:

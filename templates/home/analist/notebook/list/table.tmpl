@@ -1,0 +1,61 @@
+{{define "home/analist/notebook/list/table.tmpl"}}
+{{if .CloseModal}}
+<div id="modal-root" hx-swap-oob="innerHTML"></div>
+{{end}}
+<section id="notebook-list" {{if .SwapOOB}}hx-swap-oob="outerHTML"{{end}} class="card bg-base-100 shadow-xl">
+  <div class="card-body gap-4">
+    <div class="overflow-x-auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range .Notebooks}}
+          <tr>
+            <td>{{if .Title.Valid}}{{.Title.String}}{{else}}Untitled{{end}}</td>
+            <td>{{.Created}}</td>
+            <td>{{.Updated}}</td>
+          </tr>
+          {{else}}
+          <tr>
+            <td colspan="3" class="text-center opacity-70">No notebooks found.</td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex items-center justify-between gap-4">
+      <div class="text-sm opacity-70">
+        Page {{.Page}}
+      </div>
+
+      <div class="join">
+        <button
+          class="join-item btn btn-sm"
+          {{if not .HasPrev}}disabled{{end}}
+          hx-get="/machin8/home/analist/notebook/list/table?page={{.PrevPage}}"
+          hx-target="#notebook-list"
+          hx-swap="outerHTML"
+        >
+          Prev
+        </button>
+        <button class="join-item btn btn-sm btn-active">Page {{.Page}}</button>
+        <button
+          class="join-item btn btn-sm"
+          {{if not .HasNext}}disabled{{end}}
+          hx-get="/machin8/home/analist/notebook/list/table?page={{.NextPage}}"
+          hx-target="#notebook-list"
+          hx-swap="outerHTML"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+{{end}}

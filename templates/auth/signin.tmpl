@@ -1,0 +1,106 @@
+{{define "signin.tmpl"}}
+<!doctype html>
+<html lang="en" data-theme="lemonade">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>machin8</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="min-h-screen bg-base-200 text-base-content">
+  <main class="min-h-screen px-4 py-8 md:px-8">
+    <div class="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-5xl items-center justify-center">
+      <div class="grid w-full overflow-hidden rounded-3xl bg-base-100 shadow-2xl ring-1 ring-base-300 lg:grid-cols-2">
+        <section class="relative hidden overflow-hidden bg-primary text-primary-content lg:flex lg:flex-col lg:justify-between">
+          <div class="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_top_left,_white_0,_transparent_35%),radial-gradient(circle_at_bottom_right,_white_0,_transparent_30%)]"></div>
+          <div class="relative p-10">
+            <div class="badge badge-secondary badge-lg border-0">machin8</div>
+            <h1 class="mt-8 max-w-sm text-4xl font-semibold leading-tight">
+              Sign in to continue into your workspace
+            </h1>
+            <p class="mt-4 max-w-md text-sm/6 opacity-80">
+              Access notebooks, auth tools, and internal workflows from one place.
+            </p>
+          </div>
+          <div class="relative p-10 text-sm opacity-80">
+            Secure session access for the machin8 environment.
+          </div>
+        </section>
+
+        <section class="p-6 sm:p-8 md:p-10">
+          <div class="mb-8 lg:hidden">
+            <div class="badge badge-secondary border-0">machin8</div>
+            <h1 class="mt-4 text-3xl font-semibold">Sign in</h1>
+            <p class="mt-2 text-sm opacity-70">Use your credentials to continue.</p>
+          </div>
+
+          {{if .Error}}
+          <div class="alert alert-error mb-6">
+            <span>{{.Error}}</span>
+          </div>
+          {{end}}
+
+          <form method="post" action="{{if .To}}/machin8/auth/signin?to={{.To}}{{else}}/machin8/auth/signin?to=/machin8/home{{end}}" class="space-y-4">
+            <label class="input validator flex w-full items-center gap-3 bg-base-200">
+              <svg class="h-[1em] shrink-0 opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </g>
+              </svg>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                required
+                placeholder="Username"
+                minlength="3"
+                maxlength="30"
+                title="Only letters, numbers or dash"
+                autocomplete="username"
+                class="w-full"
+              />
+            </label>
+            <p class="validator-hint -mt-2 px-1 text-xs opacity-70">
+              3 to 30 characters, letters, numbers, or dash only
+            </p>
+
+            <label class="input validator flex w-full items-center gap-3 bg-base-200">
+              <svg class="h-[1em] shrink-0 opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+                  <path d="M17 11V8a5 5 0 0 0-10 0v3"></path>
+                  <rect width="14" height="11" x="5" y="11" rx="2"></rect>
+                </g>
+              </svg>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                placeholder="Password"
+                minlength="3"
+                maxlength="72"
+                title="Must be 3 to 72 characters"
+                autocomplete="current-password"
+                class="w-full"
+              />
+            </label>
+            <p class="validator-hint -mt-2 px-1 text-xs opacity-70">
+              3 to 72 characters
+            </p>
+
+            <div class="flex justify-end">
+              <button type="submit" class="btn btn-primary w-full sm:w-auto">
+                Sign in
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+{{end}}

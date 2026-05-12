@@ -1,0 +1,66 @@
+{{define "home/analist/notebook/index.tmpl"}}
+<div class="space-y-4">
+  <div class="flex items-center justify-between gap-4">
+    <div>
+      <h1 class="text-3xl font-semibold">Notebooks</h1>
+      <p class="text-sm opacity-70">Notebooks related to the current user.</p>
+    </div>
+    <button
+      class="btn btn-primary"
+      hx-get="/machin8/home/analist/notebook/create"
+      hx-target="#modal-root"
+      hx-swap="innerHTML"
+    >
+      New notebook
+    </button>
+  </div>
+
+  <div
+    hx-get="/machin8/home/analist/notebook/list/table"
+    hx-trigger="load"
+    hx-target="#notebook-list"
+    hx-swap="outerHTML"
+  ></div>
+
+  <section id="notebook-list" class="card bg-base-100 shadow-xl">
+    <div class="card-body gap-4">
+      <div class="flex items-center justify-between gap-4">
+        <div class="space-y-2">
+          <div class="h-7 w-32 rounded bg-base-200"></div>
+          <div class="h-4 w-56 rounded bg-base-200"></div>
+        </div>
+        <div class="skeleton h-10 w-32 rounded-btn"></div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Created</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="skeleton h-4 w-10"></div></td>
+              <td><div class="skeleton h-4 w-24"></div></td>
+              <td><div class="skeleton h-4 w-24"></div></td>
+            </tr>
+            <tr>
+              <td><div class="skeleton h-4 w-10"></div></td>
+              <td><div class="skeleton h-4 w-24"></div></td>
+              <td><div class="skeleton h-4 w-24"></div></td>
+            </tr>
+            <tr>
+              <td><div class="skeleton h-4 w-10"></div></td>
+              <td><div class="skeleton h-4 w-24"></div></td>
+              <td><div class="skeleton h-4 w-24"></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+{{end}}
